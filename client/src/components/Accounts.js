@@ -4,6 +4,8 @@ import Pool from "../UserPool";
 
 const AccountContext = createContext();
 
+//TODO need to reformat this
+
 const Account = (props) => {
   const getSession = async () =>
     await new Promise((resolve, reject) => {

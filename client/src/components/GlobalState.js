@@ -14,10 +14,26 @@ export const GlobalProvider = ({ children }) => {
 
   async function getMessage() {
     try {
-      getSession().then(({ header }) => {
-        console.log(header);
-      });
-      let res = await axios.get("http://localhost:5000/");
+      let options = {};
+      options.method = "get";
+      options.url = "http://localhost:5000/";
+
+      // getSession().then(({ header }) => {
+      //   // console.log(header);
+
+      // });
+
+      let session = await getSession();
+      options.headers = {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + session.header.Authorization,
+      };
+
+      // console.log(session.header.Authorization);
+
+      // console.log(options.headers);
+
+      let res = await axios(options);
       console.log(res.data);
     } catch (error) {
       console.error(error);

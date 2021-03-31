@@ -1,6 +1,7 @@
 import express, { Router } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import { validateAuth } from "./auth.js";
 
 dotenv.config();
 
@@ -10,8 +11,8 @@ app.use(cors());
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  console.log;
+router.get("/", validateAuth, (req, res) => {
+  console.log("made it here");
   res.status(200).json({ msg: "hello" });
 });
 
